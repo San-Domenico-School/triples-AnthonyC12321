@@ -76,5 +76,16 @@ public class Card extends Actor
    {
        isSelected = a;
    }
+   
+   public void setImageSelected(boolean a)
+   {
+       if (a)
+       {
+           setImage(selectedCardImage);
+       } else
+       {
+           setImage(cardImage);
+       }
+   }
 }
 

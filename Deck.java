@@ -1,18 +1,87 @@
 /**
- * Write a description of class Deck here.
+ * A deck has cards.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Anthony C.  
+ * @version 1/23/24
  */
 
 import greenfoot.*;
+import java.util.ArrayList;
 
 public class Deck 
 {
-    /****************************************************
-    ***   Leave as comment until ready to implement   ***
-    *****************************************************
-    // adds all the cards to the unshuffled deck.   
+    
+    
+    private Card[] unShuffledDeck;
+    private ArrayList<Card> shuffledDeck = new ArrayList<Card>();
+    
+
+    Deck(int numOfCardsInDeck)
+    {
+        numOfCardsInDeck = limitNumCardsInDeck(numOfCardsInDeck);  // limits size to 27 or 81        
+        unShuffledDeck = new Card[numOfCardsInDeck + 1];           // playing cards plus blank card
+        shuffledDeck = new ArrayList<>();                          // Instantiates ArrayList with no elements
+        populateUnshuffledDeckWithCards(numOfCardsInDeck);         // Initializes Unshuffled Deck
+        createShuffledDeck();                                      // Initializes shuffled deck excluding blank card
+    }
+
+    protected int getNumCardsInDeck()
+    {
+        //keeps track of how many unused cards remain in the deck
+        return shuffledDeck.size();
+    }
+    
+    protected Card getTopCard()
+    {
+        //returns the top card of the deck as the cards are dealt
+        return shuffledDeck.remove(0);
+    }
+    
+    protected Card getShuffledCard(int a)
+    {
+        //returns a card at a specific location in the deck
+        return shuffledDeck.get(a);
+    }
+    
+    protected ArrayList getShuffledDeck()
+    {
+        //returns the entire shuffled deck
+        return shuffledDeck;
+    }
+    
+    protected int limitNumCardsInDeck(int a)
+    {
+        //forces the number of cards in the unshuffled deck to either be 27 (3 set of 3 characteristics of triples) or 81(3 set of 4 characteristics of triples)
+        if (a <= 27)
+        {
+            return 27;
+        } else
+        {
+            return 81;
+        }
+    }
+    
+    public void populateUnShuffledDeckWithCards()
+    {
+       
+    }
+    
+    private void createShuffledDeck()
+    {
+         
+         for (int i = 1; i < unShuffledDeck.length; i++)
+         {
+             int sizeOf = shuffledDeck.size();
+             
+             if (sizeOf < 1)
+             {
+                 sizeOf = 1;
+             }
+             
+             shuffledDeck.add(Greenfoot.getRandomNumber(sizeOf), unShuffledDeck[i]);
+         }
+    }
+
     private void populateUnshuffledDeckWithCards(int numOfCardsInDeck)        
     {
         unShuffledDeck[0] = new Card(Card.Shape.NO_SHAPE, Card.Color.NO_COLOR,0,0,
@@ -269,5 +338,5 @@ public class Deck
           }
     }
     
-    **************  END OF COMMENT BLOCK  ***************/
+
 }
